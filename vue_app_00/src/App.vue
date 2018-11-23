@@ -10,16 +10,16 @@
 			</a>
 			<router-link to="/home/login" class="mui-tab-item">
 				<span class="mui-icon mui-icon-contact"></span>
-				<span class="mui-tab-label">会员</span>
+				<span class="mui-tab-label">酒店</span>
 			</router-link>
 			<router-link to="/shop" class="mui-tab-item" href="#">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
                 <span class="mui-badge">3</span></span></span>
-				<span class="mui-tab-label">购物车</span>
+				<span class="mui-tab-label">旅行商城</span>
 			</router-link>
 			<a class="mui-tab-item" href="#">
 				<span class="mui-icon mui-icon-search"></span>
-				<span class="mui-tab-label">搜索</span>
+				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
  </div>
@@ -27,7 +27,6 @@
 
 <style>
    .app-container{
-     padding-top:40px;
      padding-bottom:50px;
      overflow-x:hidden;
    }

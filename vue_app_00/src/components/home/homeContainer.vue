@@ -1,5 +1,5 @@
 <template>
-    <div class="app-homeContainer">1
+    <div class="app-homeContainer">
         <!--轮播图-->
         <div class="mui-card">
 			<div class="mui-card-content">
@@ -28,7 +28,9 @@
         },        
         methods:{
             getImages(){
+                var url="http://127.0.0.1:8000/imagelist";
                 this.$http.get("imagelist").then(result=>{
+                    console.log(result);
                     this.imageList=result.body;                   
                 })
             },
@@ -41,7 +43,13 @@
         }
     }
 </script>
-
+    
 <style>
+    .app-homeContainer .mui-card{
+        margin:0;
+    }
+    .app-homeContainer .mui-card-content-inner{
+        padding:0;
+    }
     
 </style>

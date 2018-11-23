@@ -17,9 +17,12 @@
 
 <style>
     .app-subswipe .mint-swipe{
-        height:140px;
+        height:125px;
     }
     .app-subswipe .mint-swipe img{
         width:100%;
+    }
+    .app-subswipe .mint-swipe-indicators{
+        bottom:0;
     }
 </style>

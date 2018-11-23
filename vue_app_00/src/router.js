@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import testContainer from './components/testContainer'
+import homeContainer from './components/home/homeContainer'
 
 Vue.use(Router);
 
@@ -8,6 +9,7 @@ Vue.use(Router);
 export default new Router({  
     routes:[
         {path:'/',redirect:'/home'},//http://127.0.0.1:8080/#/
-        {path:'/test',component:testContainer}
+        {path:'/test',component:testContainer},
+        {path:'/home',component:homeContainer}
     ]
 })

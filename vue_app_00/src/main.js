@@ -54,7 +54,7 @@ Vue.filter("datetimeFilter",function(val){//val是参数，给{{日期字符串 
   return `${y}-${m}-${d} ${h}:${min}:${s}`;
 })
 //统一配置服务器根目录
-Vue.http.options.root="http://127.0.0.1:6666/";
+Vue.http.options.root="http://127.0.0.1:8000/";
 //修改请求头（改成post格式）
 //Vue.http.options.emulateJSON=true;
 
