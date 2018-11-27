@@ -10,7 +10,7 @@ app.listen(8000,(req,res)=>{
 });
 
 app.use(cors({
-    origin:["http://127.0.0.1:8080","http://localhost:8080"],
+    origin:["http://127.0.0.1:8080","http://localhost:8080","http://localhost:8000"],
     credentials:true  //允许
 }))
 
