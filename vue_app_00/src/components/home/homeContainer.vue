@@ -15,7 +15,7 @@
         <img src="http://127.0.0.1:8000/img/icons/info.png" />
         </div>
     <!--导航-->
-      <div id="nav">
+      <v-touch id="nav" @click="onPanLeft($event)" tag="div">
         <div>
           <img src="http://127.0.0.1:8000/img/icons/preparation.png">
           <span>攻略</span>
@@ -41,14 +41,14 @@
           <span>旅行视频</span>
         </div>
         <div>
-          <img src="http://127.0.0.1:8000/img/icons/communicate.png">
+          <img src="http://127.0.0.1:8000/img/icons/QA.png">
           <span>问答</span>
         </div>
         <p>
           <span class="leftPoint"></span>
           <span class="rightPoint"></span>
         </p>
-      </div>
+      </v-touch>
   </div>
 </template>
 
@@ -56,6 +56,7 @@
     //引入轮播图子组件
     import swiper from "../sub/swiper.vue"
     import {Toast} from "mint-ui"
+    
     //引入mui.js,会有严格模式的限制，慎用！
     //import mui from "../../lib/mui/js/mui.js"
     export default{
@@ -74,6 +75,11 @@
                     this.imageList=result.body;                   
                 })
             },
+            onPanLeft(data){
+                var x=data.deltaX;
+                console.log(data);
+            },
+            onPanRight(){console.log(2)}
         },
         components:{//给子组件swiper注册
             "swiper-box":swiper

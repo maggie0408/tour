@@ -3,6 +3,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
+
 import'mint-ui/lib/style.css'
 
 Vue.config.productionTip = false
@@ -17,7 +18,14 @@ Vue.config.productionTip = false
 import './lib/mui/css/mui.css'
 // 导入 MUI 的样式表，扩展图标样式，购物车图标,还需要加载图标字体文件
 import './lib/mui/css/icons-extra.css'
+//滑动屏幕
+import VueTouch from 'vue-touch'
+Vue.use(VueTouch, {name: 'v-touch'})
+VueTouch.config.swipe = {
 
+  threshold: 100 //手指左右滑动距离
+
+}
 /*
 //一、引入组件mintui库的Header
 //step1：引入指定的组件
