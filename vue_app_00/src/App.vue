@@ -5,20 +5,32 @@
     <!--底部导航条-->
     <nav class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" href="#">
-				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-icon">
+                    <img src="http://127.0.0.1:8000/img/icons/home.png" >
+                    <img src="http://127.0.0.1:8000/img/icons/home_active.png" style="display:none">    
+                </span>
 				<span class="mui-tab-label">首页</span>
 			</a>
 			<router-link to="/home/login" class="mui-tab-item">
-				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-icon">
+                  <img src="http://127.0.0.1:8000/img/icons/hotel2.png">
+                  <img src="http://127.0.0.1:8000/img/icons/hotel2_active.png" style="display:none">
+                </span>
 				<span class="mui-tab-label">酒店</span>
 			</router-link>
 			<router-link to="/shop" class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-                <span class="mui-badge">3</span></span></span>
-				<span class="mui-tab-label">旅行商城</span>
+				<span class="mui-icon mui-icon-extra">
+                  <img src="http://127.0.0.1:8000/img/icons/shop2.png">
+                  <img src="http://127.0.0.1:8000/img/icons/shop2_active.png" style="display:none">
+                  <span class="mui-badge">3</span>
+                </span>
+				<span class="mui-tab-label">旅行商城</span>                
 			</router-link>
 			<a class="mui-tab-item" href="#">
-				<span class="mui-icon mui-icon-search"></span>
+				<span class="mui-icon">
+                   <img src="http://127.0.0.1:8000/img/icons/me.png">
+                   <img src="http://127.0.0.1:8000/img/icons/me_active.png" style="display:none">
+                </span>
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
@@ -30,7 +42,9 @@
      padding-bottom:50px;
      overflow-x:hidden;
    }
-
+    .app-container .mui-bar-tab{
+        background-color:#F1F1F1;
+    }
  .mui-bar-tab .mui-tab-item-tao.mui-active {
     color: #007aff;
  }

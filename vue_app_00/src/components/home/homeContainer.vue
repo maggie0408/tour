@@ -81,8 +81,8 @@
                 nav:document.getElementById("nav"),
                 textNav:document.getElementById("textNav"),
                 navWidth:document.body.clientWidth,
-                x:"",
-                leftLength:0                
+                x:"",x2:"",
+                leftLength:0,leftLength2:0                
             }
         },  
         computed:{
@@ -96,12 +96,19 @@
                 })
             },
             onPanLeft(data){           
-                this.x=data.deltaX;        
-                nav.style.marginLeft=this.x+"px";
+                this.x=data.deltaX;  
+                if(this.leftLength+this.x<(-this.navWidth)){
+                    this.leftLength=-this.navWidth;
+                    this.x=0;
+                };      
+                nav.style.marginLeft=this.x+this.leftLength+"px";
             },
             onPanRight(data){
-                this.x=data.deltaX;                
-                nav.style.marginLeft=-this.navWidth+this.x+"px";
+                this.x=data.deltaX;   
+                if(this.leftLength+this.x>=0){
+                    this.leftLength=0;this.x=0;
+                };             
+                nav.style.marginLeft=this.x+this.leftLength+"px";
             },
             onPanEnd(){
                 var bullet1=document.getElementById("leftPoint");         
@@ -110,29 +117,31 @@
                     nav.style.marginLeft=-this.navWidth+"px";
                     bullet1.style.width=2+"px";
                     bullet2.style.width=12+"px";
+                    this.leftLength=-this.navWidth;
                 }else{
                     nav.style.marginLeft=0;
                     bullet1.style.width=12+"px";
                     bullet2.style.width=2+"px";
-                }
+                    this.leftLength=0;
+                };                
             },
             onPanLeft2(data){           
-                this.x=data.deltaX;                                        
-                if(this.leftLength+this.x<(-this.navWidth)){
-                    this.leftLength=-this.navWidth;
-                    this.x=0;
+                this.x2=data.deltaX;                                        
+                if(this.leftLength2+this.x2<(-this.navWidth)){
+                    this.leftLength2=-this.navWidth;
+                    this.x2=0;
                 };
-                textNav.style.marginLeft=this.x+this.leftLength+"px";
+                textNav.style.marginLeft=this.x2+this.leftLength2+"px";
             },
             onPanRight2(data){
-                this.x=data.deltaX;                    
-                if(this.leftLength+this.x>=0){
-                    this.leftLength=0;this.x=0;
+                this.x2=data.deltaX;                    
+                if(this.leftLength2+this.x2>=0){
+                    this.leftLength2=0;this.x2=0;
                 };
-                textNav.style.marginLeft=this.leftLength+this.x+"px";
+                textNav.style.marginLeft=this.leftLength2+this.x2+"px";
             },
             onPanEnd2(){                
-                this.leftLength=this.x+this.leftLength;
+                this.leftLength2=this.x2+this.leftLength2;
             }
         },
         components:{//给子组件swiper注册
