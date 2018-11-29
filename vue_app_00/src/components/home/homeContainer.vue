@@ -8,12 +8,24 @@
 		  </div>
 		</div>
 	  </div>
+    
     <!--搜索栏-->
-      <div id="search">
+    <div id="search">
+      <!--图标导航缩略图-->
+      <div id="thumbnail">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div>
         <img src="http://127.0.0.1:8000/img/icons/search.png" />
         <input type="text" /> 
         <img src="http://127.0.0.1:8000/img/icons/info.png" />
-        </div>
+      </div>      
+    </div>
     <!--图标导航-->
       <v-touch id="nav" @panend="onPanEnd" @panleft="onPanLeft" @panright="onPanRight" tag="div">
         <div>
@@ -51,25 +63,17 @@
       </v-touch>
       <div class="divide"></div>
       <!--文字导航-->
-      <v-touch id="textNav" @panend="onPanEnd2" @panleft="onPanLeft2" @panright="onPanRight2" tag="div">
-        <div>关注<div class="newInfo"></div></div>
-        <div>正在旅行<div class="selected"></div></div>
-        <div>推荐</div>
-        <div>圣地巡礼</div>
-        <div>附近</div>
-        <div>国内</div>
-        <div>国外</div>
-        <div>带娃旅行</div>
-        <div>海岛游</div>
-        <div>情侣出行</div>
-        <div>自驾游</div>
-      </v-touch>
+      <textNav-box></textNav-box>
+      <!--底部导航条-->
+      <bottom-box></bottom-box>
   </div>
 </template>
 
 <script>
     //引入轮播图子组件
     import swiper from "../sub/swiper.vue"
+    import bottom from "../sub/bottom.vue"
+    import textNav from "../sub/textNav.vue"
     import {Toast} from "mint-ui"
     
     //引入mui.js,会有严格模式的限制，慎用！
@@ -79,10 +83,9 @@
             return {
                 imageList:[],
                 nav:document.getElementById("nav"),
-                textNav:document.getElementById("textNav"),
                 navWidth:document.body.clientWidth,
-                x:"",x2:"",
-                leftLength:0,leftLength2:0                
+                x:"",
+                leftLength:0               
             }
         },  
         computed:{
@@ -116,36 +119,24 @@
                 if(this.x<0){
                     nav.style.marginLeft=-this.navWidth+"px";
                     bullet1.style.width=2+"px";
+                    bullet1.style.borderColor="#E4E1E2";
                     bullet2.style.width=12+"px";
+                    bullet2.style.borderColor="orange";
                     this.leftLength=-this.navWidth;
                 }else{
                     nav.style.marginLeft=0;
                     bullet1.style.width=12+"px";
+                    bullet1.style.borderColor="orange";
                     bullet2.style.width=2+"px";
+                    bullet2.style.borderColor="#E4E1E2";
                     this.leftLength=0;
                 };                
             },
-            onPanLeft2(data){           
-                this.x2=data.deltaX;                                        
-                if(this.leftLength2+this.x2<(-this.navWidth)){
-                    this.leftLength2=-this.navWidth;
-                    this.x2=0;
-                };
-                textNav.style.marginLeft=this.x2+this.leftLength2+"px";
-            },
-            onPanRight2(data){
-                this.x2=data.deltaX;                    
-                if(this.leftLength2+this.x2>=0){
-                    this.leftLength2=0;this.x2=0;
-                };
-                textNav.style.marginLeft=this.leftLength2+this.x2+"px";
-            },
-            onPanEnd2(){                
-                this.leftLength2=this.x2+this.leftLength2;
-            }
         },
         components:{//给子组件swiper注册
-            "swiper-box":swiper
+            "swiper-box":swiper,
+            "bottom-box":bottom,
+            "textNav-box":textNav
         },
         created(){
             this.getImages();
@@ -164,18 +155,6 @@
     .clearBoth{
         display:block;clear:both;content:"";
     }
-    .newInfo{
-        width:3px;height:3px;border:3px solid #F34C40;
-        border-radius:50%;
-        position:absolute;right:-5px;top:0;
-    }
-    .selected{
-        position:absolute;top:10%;left:20%;
-        width:60%;height:8px;
-        border:4px solid #F5D64B;
-        border-radius:0 0 50% 50%/0 0 100% 100%;
-        border-top:none;
-    }
     .app-homeContainer .mui-card{
         margin:0;
     }
@@ -183,24 +162,67 @@
         padding:0;
     }
     #search{
-        margin-top:3%;margin-left:8%;
+        display:flex;
+        margin-top:3%;
         position:relative;
     }
-    #search input{
-        width:85%;height:35px;
+    #thumbnail{
+        visibility:hidden;
+        width:10%;height:35px;
+        margin-right:2%;margin-left:2%;
+        padding-top:1.5%;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-around;
+    }
+    #thumbnail div{
+        width:8px;height:8px;
+        border:4px solid red;
+        border-radius:50%;
+        margin-left:3px;
+    }
+    #thumbnail>div:first-child{
+        border:4px solid orange;
+    }
+    #thumbnail>div:nth-child(2){
+        border:4px solid red;
+    }
+    #thumbnail>div:nth-child(3){
+        border:4px solid purple;
+    }
+    #thumbnail>div:nth-child(4){
+        border:4px solid green;
+    }
+    #thumbnail>div:nth-child(5){
+        border:4px solid blue;
+    }
+    #thumbnail>div:last-child{
+        border-radius:0;
+        border-top:6px solid black;
+        border-left:4px solid transparent;
+        border-right:4px solid transparent;
+        border-bottom:0px solid transparent;
+        margin-top:3%;
+    }
+    #search>div:last-child{
+        width:80%;
+        position:relative;
+    }
+    #search>div:last-child input{
+        width:88%;height:35px;
         padding-left:10%;
         border:1px solid #E7E7E7;
         border-radius:20px;
     }
-    #search>img:first-child{
+    #search>div:last-child>img:first-child{
         width:6%;
         position:absolute;
-        left:3%;top:15%;
+        left:2%;top:15%;
     }
-    #search>img:last-child{
+    #search>div:last-child>img:last-child{
         width:5%;
         position:absolute;
-        top:20%;right:5%;
+        top:20%;right:1%;
     }
     #nav{
         display:flex;
@@ -214,37 +236,19 @@
     }
     #nav div img{width:60%;}
     #nav div span{display:block;font-size:13px;color:#878787;text-align:center;}
-    #nav p.point{
-        position:absolute;left:48%;top:40%;
-        width:6%;height:10px;
-        display:flex;justify-content:space-around;
+    #nav p.point{position:absolute;left:48%;top:40%;width:6%;height:10px;display:flex;justify-content:space-around;
     }
     #nav p span{
         display:block;
-        height:2px;border-radius:50px;
-        border:2px solid orange;
+        height:2px;border-radius:50px;        
     }
     #leftPoint{
-        width:12px;
+        width:12px;border:2px solid orange;
+    }
+    #rightPoint{
+        border:2px solid #E4E1E2;
     }
     div.divide{
         margin-top:20px;
-    }
-    #textNav{
-        display:flex;
-        margin-left:1%;margin-top:2%;
-        width:200%;
-    }
-    #textNav div{
-        position:relative;
-        margin-left:3%;
-        font-size:14px;
-        color:#6D6D6D;
-    }
-    #textNav>div:nth-child(2){
-        position:relative;
-        margin-left:2%;
-        font-size:17px;font-weight:bold;
-        color:#000;
     }
 </style>
