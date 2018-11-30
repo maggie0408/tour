@@ -1,14 +1,13 @@
 <template>
- <div class="app-container">
+  <div class="app-container">
     <!--中间不同的容器-->
-    <router-view></router-view>    
- </div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <style>
-   .app-container{
-     padding-bottom:50px;
-     overflow-x:hidden;
-   }   
-
+  .app-container{
+    padding-bottom:50px;
+    overflow-x:hidden;
+  }
 </style>

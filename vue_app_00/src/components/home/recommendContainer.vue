@@ -1,13 +1,13 @@
 <template>
   <div class="recommend-container">
-  recommend
+    recommend
   </div>
 </template>
 
 <script>
-    
+
 </script>
 
 <style>
-    
+
 </style>

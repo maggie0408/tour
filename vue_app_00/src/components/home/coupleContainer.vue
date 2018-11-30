@@ -1,13 +1,13 @@
 <template>
   <div class="couple-container">
-  couple
+    couple
   </div>
 </template>
 
 <script>
-    
+
 </script>
 
 <style>
-    
+
 </style>

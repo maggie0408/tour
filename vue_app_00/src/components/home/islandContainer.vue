@@ -1,13 +1,13 @@
 <template>
   <div class="island-container">
-  island
+    island
   </div>
 </template>
 
 <script>
-    
+
 </script>
 
 <style>
-    
+
 </style>

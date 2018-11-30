@@ -1,13 +1,13 @@
 <template>
   <div class="nearby-container">
-  nearby
+    nearby
   </div>
 </template>
 
 <script>
-    
+
 </script>
 
 <style>
-    
+
 </style>

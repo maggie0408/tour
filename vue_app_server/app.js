@@ -23,4 +23,17 @@ app.get('/imagelist',(req,res)=>{
         {id:4,img_url:'http://127.0.0.1:8000/img/swiper/swiper4.jpeg'}
     ];
     res.send(obj);
+});
+//图标导航图
+app.get('/navimg',(req,res)=>{
+    var obj=[
+        {id:1,img_url:'http://127.0.0.1:8000/img/icons/preparation.png'},
+        {id:2,img_url:'http://127.0.0.1:8000/img/icons/hotel.png'},
+        {id:3,img_url:'http://127.0.0.1:8000/img/icons/train.png'},
+        {id:4,img_url:'http://127.0.0.1:8000/img/icons/shop.png'},
+        {id:5,img_url:'http://127.0.0.1:8000/img/icons/notes.png'},
+        {id:6,img_url:'http://127.0.0.1:8000/img/icons/video.png'},
+        {id:7,img_url:'http://127.0.0.1:8000/img/icons/QA.png'},
+    ];
+    res.send(obj);
 })

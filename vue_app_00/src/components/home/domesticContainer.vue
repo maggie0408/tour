@@ -1,13 +1,13 @@
 <template>
   <div class="domestic-container">
-  domestic
+    domestic
   </div>
 </template>
 
 <script>
-    
+
 </script>
 
 <style>
-    
+
 </style>

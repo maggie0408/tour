@@ -1,9 +1,11 @@
 <template>
-<div class="app-subswipe">
-    <mt-swipe :auto="4000">        <!--:key表示当前属性值，应该填唯一的-->
+  <div class="app-swipe-container">
+    <div class="app-subswipe">
+      <mt-swipe :auto="4000">
         <mt-swipe-item v-for="item in list" :key="item.id"><img :src="item.img_url"></mt-swipe-item>
-    </mt-swipe>
-</div>
+      </mt-swipe>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -16,6 +18,7 @@
 </script>
 
 <style>
+    .app-swipe-container{height:200px;}
     .app-subswipe .mint-swipe{
         height:125px;
     }
