@@ -74,6 +74,11 @@ import Vuex from "vuex"
 Vue.use(Vuex)
 //4、创建Vuex实例对象
 
+import axios from 'axios'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+import qs from 'qs'
+Vue.use(qs)
 
 /* eslint-disable no-new */
 new Vue({

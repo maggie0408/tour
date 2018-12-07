@@ -12,6 +12,10 @@ import babygoContainer from './components/home/babygoContainer'
 import islandContainer from './components/home/islandContainer'
 import coupleContainer from './components/home/coupleContainer'
 import selfDrivingContainer from './components/home/selfDrivingContainer'
+import userContainer from './components/user/userContainer'
+import loginContainer from './components/user/loginContainer'
+import settingContainer from "./components/user/settingContainer";
+import signupContainer from "./components/user/signupContainer";
 
 Vue.use(Router);
 
@@ -20,18 +24,24 @@ export default new Router({
   routes:[
     {path:'*',redirect:'/home'},
     {path:'/',redirect:'/home'},//http://127.0.0.1:8080/#/
-    {path:'/home',component:homeContainer,redirect:'/travelling',children:[
-        {path:'/care',component:careContainer},
-        {path:'/travelling',component:travellingContainer},
-        {path:'/recommend',component:recommendContainer},
-        {path:'/holy',component:holyContainer},
-        {path:'/nearby',component:nearbyContainer},
-        {path:'/domestic',component:domesticContainer},
-        {path:'/overseas',component:overseasContainer},
-        {path:'/babygo',component:babygoContainer},
-        {path:'/island',component:islandContainer},
-        {path:'/couple',component:coupleContainer},
-        {path:'/selfdriving',component:selfDrivingContainer}
-      ]}
+    {path:'/home',component:homeContainer,redirect:'/home/travelling',children:[
+        {path:'/home/care',component:careContainer},
+        {path:'/home/travelling',component:travellingContainer},
+        {path:'/home/recommend',component:recommendContainer},
+        {path:'/home/holy',component:holyContainer},
+        {path:'/home/nearby',component:nearbyContainer},
+        {path:'/home/domestic',component:domesticContainer},
+        {path:'/home/overseas',component:overseasContainer},
+        {path:'/home/babygo',component:babygoContainer},
+        {path:'/home/island',component:islandContainer},
+        {path:'/home/couple',component:coupleContainer},
+        {path:'/home/selfdriving',component:selfDrivingContainer}
+      ]
+    },
+    {path:'/user',component:userContainer,children:[
+        {path:'/user/setting',component:settingContainer}
+      ]},
+    {path:'/login',component:loginContainer},
+    {path:'/signup',component:signupContainer}
   ]
 })

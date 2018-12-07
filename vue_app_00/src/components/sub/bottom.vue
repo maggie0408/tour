@@ -1,57 +1,54 @@
 <template>
-  <div class="app-bottom">
+  <div class="app-bottom-container">
     <router-view></router-view>
     <!--底部导航条-->
     <nav class="mui-bar mui-bar-tab">
-      <a class="mui-tab-item mui-active" href="#">
+      <router-link :to="goPath[index]" class="mui-tab-item navBotm" v-for="(value,index) in titleList">
 		    <span class="mui-icon">
-          <img src="http://127.0.0.1:8000/img/icons/home.png" style="display:none">
-          <img src="http://127.0.0.1:8000/img/icons/home_active.png">
+          <img :src="icons[index*2]" :class="{isHide:index==isSelected}">
+          <img :src="icons[index*2+1]" :class="{isHide:index!=isSelected}">
         </span>
-        <span class="mui-tab-label">首页</span>
-      </a>
-      <router-link to="/home/login" class="mui-tab-item">
-		<span class="mui-icon">
-          <img src="http://127.0.0.1:8000/img/icons/hotel2.png">
-          <img src="http://127.0.0.1:8000/img/icons/hotel2_active.png" style="display:none">
-        </span>
-        <span class="mui-tab-label">酒店</span>
+        <span class="mui-tab-label" :class="{selected:index==isSelected}">{{value}}</span>
       </router-link>
-      <router-link to="/shop" class="mui-tab-item" href="#">
-		<span class="mui-icon mui-icon-extra">
-          <img src="http://127.0.0.1:8000/img/icons/shop2.png">
-          <img src="http://127.0.0.1:8000/img/icons/shop2_active.png" style="display:none">
-        </span>
-        <span class="mui-tab-label">旅行商城</span>
-      </router-link>
-      <a class="mui-tab-item" href="#">
-	    <span class="mui-icon">
-          <img src="http://127.0.0.1:8000/img/icons/me.png">
-          <img src="http://127.0.0.1:8000/img/icons/me_active.png" style="display:none">
-        </span>
-        <span class="mui-tab-label">我的</span>
-      </a>
     </nav>
   </div>
 </template>
 
 <script>
   //import mui from "../../lib/mui/js/mui.js"
-  export default{
+
+  export default {
     data(){
       return {
         titleList:["首页","酒店","旅行商城","我的"],
-        goPath:[]
+        icons:[],
+        goPath:["/home","/hotel","/shop","/user"],
+        isActive:true
       }
     },
+
     computed:{
     },
-    methods:{
-    },
-    components:{
-    },
-    created(){
 
+    props:["isSelected"],
+
+    methods:{
+      getIconImg(){
+        var url="/imagelist";
+        this.$http.get("imagelist").then(result=>{
+          var icons=result.body.icons;
+          for(var i=0;i<icons.length;i++){
+            this.icons.push(icons[i].img_url);
+          };
+        })
+      }
+    },
+
+    created(){
+      this.getIconImg();
+    },
+
+    components:{
     }
   }
 </script>
@@ -60,14 +57,17 @@
   body{
     background-color:#FFFFFF;
   }
-  .app-bottom{
+  .app-bottom-container{
     border-top:0 !important;
   }
-  .app-bottom .mui-bar-tab{
+  .app-bottom-container .mui-bar-tab{
     background-color:#F1F1F1;
   }
-  .mui-bar-tab .mui-tab-item-tao.mui-active {
+  .selected{
     color: #007aff;
+  }
+  .isHide{
+    display:none;
   }
   .mui-bar-tab .mui-tab-item-tao {
     display: table-cell;

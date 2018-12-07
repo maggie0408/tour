@@ -4,11 +4,10 @@
     <div class="mui-card" :class="swiperBlock==true?'':'unDisplay'">
       <div class="mui-card-content">
         <div class="mui-card-content-inner">
-          <swiper-box :list="this.imageList"></swiper-box>
+          <swiper-box :list="this.swiperImg"></swiper-box>
         </div>
       </div>
     </div>
-
     <!--搜索栏-->
     <div id="search" class="search" :class="searchBarFixed == true ? 'isFixed_searchBar' :'unFixed_searchBar'">
       <!--图标导航缩略图-->
@@ -28,9 +27,9 @@
       </div>
     </div>
     <!--图标导航-->
-    <div class="navPics">
-      <v-touch id="nav" @panend="onPanEnd" @panleft="onPanLeft" @panright="onPanRight" tag="div" :class="navIcon==true?'isShow_navIcon':'unShow_navIcon'">
-        <div v-for="value,index of navImg">
+    <div class="navPics" :class="navIcon==true?'isShow_navIcon':'unShow_navIcon'">
+      <v-touch id="nav" @panend="onPanEnd" @panleft="onPanLeft" @panright="onPanRight" tag="div">
+        <div v-for="(value,index) in navImg">
           <img :src="value.img_url">
           <span>{{navName[index]}}</span>
         </div>
@@ -40,11 +39,11 @@
         <span id="rightPoint"></span>
       </p>
     </div>
-    <div class="divide" :class="{divideMarBottm:isChanged}"></div>
+    <div class="divide" :class="changeMarBotm==true?'MarBotm':''"></div>
     <!--文字导航-->
     <textNav-box :class="textNav==true?'isFixed_textNav':''"></textNav-box>
     <!--底部导航条-->
-    <bottom-box></bottom-box>
+    <bottom-box :isSelected="0"></bottom-box>
   </div>
 </template>
 
@@ -60,7 +59,7 @@
   export default{
     data(){
       return {
-        imageList:[],
+        swiperImg:[],
         navImg:[],
         navName:["攻略","酒店","火车飞机票","旅行商城","游记","旅行视频","问答"],
         //样式
@@ -73,22 +72,22 @@
         thumbnail:false,
         navIcon:true,
         textNav:false,
-        isChanged:false,
+        changeMarBotm:false
       }
     },
     computed:{
     },
     methods:{
-      getnavImg(){
-        var url="http://127.0.0.1:8000/navimg";
-        this.$http.get("navimg").then(result=>{
-          this.navImg=result.body;
-        })
-      },
-      getImages(){
+      getSwiperImg(){
         var url="http://127.0.0.1:8000/imagelist";
         this.$http.get("imagelist").then(result=>{
-          this.imageList=result.body;
+          this.swiperImg=result.body.swiperImg;
+        })
+      },
+      getnavImg(){
+        var url="http://127.0.0.1:8000/imagelist";
+        this.$http.get("imagelist").then(result=>{
+          this.navImg=result.body.navIcon;
         })
       },
       onPanLeft(data){
@@ -138,7 +137,7 @@
           this.navIcon=false;//图标导航隐藏
           this.textNav=true;//文字导航固定位置
           this.swiperBlock=false;//轮播图不显示
-          this.isChanged=true;//分隔栏下边距改变
+          this.changeMarBotm=true;//向下撑开子组件
         }
       },
       clickThumbnail(){
@@ -147,7 +146,7 @@
         this.navIcon=true;//图标导航显示
         this.textNav=false;//文字导航恢复初始样式
         this.swiperBlock=true;//轮播图显示
-        this.isChanged=false;//分隔栏下边距改变
+        this.changeMarBotm=false;//分隔栏下边距改变
       },
     },
 
@@ -158,7 +157,7 @@
     },
 
     created(){
-      this.getImages();
+      this.getSwiperImg();
       this.getnavImg();
     },
 
@@ -181,11 +180,11 @@
     background-color:#F8F8F8;
     margin-bottom:1%;
   }
-  .divideMarBottm{
-    margin-bottom:20%;
-  }
   .unDisplay{
     display:none !important;
+  }
+  .MarBotm{
+    margin-bottom:80px;
   }
   .app-homeContainer .mui-card{
     margin:0;height:125px;
@@ -269,14 +268,17 @@
     position:absolute;
     top:28%;right:1%;
   }
-  .navPics{width:100%;}
-  #nav{
-    margin-top:2%;
+  .navPics{
     width:200%;
+  }
+  #nav{
+    display:flex;
+    margin-top:2%;
+    width:100%;
     text-align:center;
   }
   .isShow_navIcon{
-    display:flex;
+    display:block;
   }
   .unShow_navIcon{
     display:none;
@@ -290,7 +292,7 @@
   p.point{
     width:25px;height:10px;
     display:flex;justify-content:space-around;
-    margin-left:48%;padding-top:2%;
+    margin-left:24%;padding-top:1%;
   }
   .navPics>p:last-child span{
     display:block;

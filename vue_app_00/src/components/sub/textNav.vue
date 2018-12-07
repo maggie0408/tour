@@ -20,7 +20,7 @@
     data(){
       return {
         nameList:["关注","正在旅行","推荐","圣地巡礼","附近","国内","国外","带娃旅行","海岛游","情侣出行","自驾游"],
-        goPath:["/care","/travelling","/recommend","/holy","/nearby","/domestic","/overseas","/babygo","/island","/couple","/selfdriving"],
+        goPath:["/home/care","/home/travelling","/home/recommend","/home/holy","/home/nearby","/home/domestic","/home/overseas","/home/babygo","/home/island","/home/couple","/home/selfdriving"],
         //样式
         x2:"",
         leftLength2:0,
@@ -84,7 +84,7 @@
     border-top:none;
   }
   .textNav-container{
-    background-color:#fff;
+    background-color:#fff;width:100%;
   }
   #textNav{
     display:flex;
